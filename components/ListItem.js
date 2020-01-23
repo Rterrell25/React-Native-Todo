@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Text, View, Button, Alert, StyleSheet } from "react-native";
 import { TasksContext } from "../context/TasksContext";
+import { Text, View, Button, Alert, StyleSheet } from "react-native";
 
 export default props => {
   const { flipTask, deleteTask } = useContext(TasksContext);
@@ -15,7 +15,7 @@ export default props => {
         <Button
           title={props.completed ? "✅" : "🔲"}
           color="white"
-          onPress={() => flipTask(props.id)}
+          onPress={async () => await flipTask(props.id)}
         />
         <Button
           title="❌"
@@ -34,7 +34,7 @@ export default props => {
                 },
                 {
                   text: "OK",
-                  onPress: () => deleteTask(props.id)
+                  onPress: async () => await deleteTask(props.id)
                 }
               ],
               { cancelable: false }
@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingHorizontal: 10
   },
+  completed: {
+    textDecorationLine: "line-through"
+  },
   textWrapper: {
     width: "80%",
     justifyContent: "center"
-  },
-  completed: {
-    textDecorationLine: "line-through"
   },
   buttonsWrapper: {
     flexDirection: "row",

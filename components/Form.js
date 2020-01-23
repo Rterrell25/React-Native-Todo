@@ -12,10 +12,10 @@ export default () => {
         style={styles.textInput}
         onChangeText={text => setDescription(text)}
         value={description}
-        onSubmitEditing={() => {
+        onSubmitEditing={async () => {
           if (description) {
             setDescription("");
-            addTask(description);
+            await addTask(description);
           }
         }}
         returnKeyType="done"
