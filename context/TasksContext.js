@@ -14,8 +14,19 @@ export const TasksContextProvider = ({ children }) => {
     setTasks([newTask, ...tasks]);
   };
 
+  const flipTask = taskId => {
+    const index = tasks.findIndex(task => task.id === taskId);
+    const newTasks = [...tasks];
+    newTasks[index].completed = !newTasks[index].completed;
+    setTasks(newTasks);
+  };
+
+  const deleteTask = taskId => {
+    setTasks(tasks.filter(task => task.id !== taskId));
+  };
+
   return (
-    <TasksContext.Provider value={{ tasks, addTask }}>
+    <TasksContext.Provider value={{ tasks, addTask, flipTask, deleteTask }}>
       {children}
     </TasksContext.Provider>
   );
