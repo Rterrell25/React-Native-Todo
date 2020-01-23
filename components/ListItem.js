@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, View, Button, StyleSheet } from "react-native";
+import { Text, View, Button, Alert, StyleSheet } from "react-native";
 import { TasksContext } from "../context/TasksContext";
 
 export default props => {
@@ -17,7 +17,30 @@ export default props => {
           color="white"
           onPress={() => flipTask(props.id)}
         />
-        <Button title="❌" color="white" onPress={() => deleteTask(props.id)} />
+        <Button
+          title="❌"
+          color="white"
+          onPress={() =>
+            Alert.alert(
+              "Are you sure?",
+              "This action cannot be undone.",
+              [
+                {
+                  text: "Cancel",
+                  onPress: () => {
+                    console.log("Cancel Pressed");
+                  },
+                  style: "cancel"
+                },
+                {
+                  text: "OK",
+                  onPress: () => deleteTask(props.id)
+                }
+              ],
+              { cancelable: false }
+            )
+          }
+        />
       </View>
     </View>
   );
