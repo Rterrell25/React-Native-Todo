@@ -1,19 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { TasksContextProvider } from "./context/TasksContext";
+import { SafeAreaView } from "react-native";
+import TasksList from "./components/TasksList";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello Wyncode!</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+export default () => (
+  <TasksContextProvider>
+    <SafeAreaView>
+      <TasksList />
+    </SafeAreaView>
+  </TasksContextProvider>
+);
