@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { FlatList, Text, View, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { TasksContext } from "../context/TasksContext";
+import ListItem from "./ListItem";
 
 export default () => {
   const { tasks } = useContext(TasksContext);
@@ -8,7 +9,7 @@ export default () => {
     <View style={styles.wrapper}>
       <FlatList
         data={tasks}
-        renderItem={({ item }) => <Text>{item.description}</Text>}
+        renderItem={({ item }) => <ListItem {...item} />}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
