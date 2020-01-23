@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextInput, View, Text, StyleSheet } from "react-native";
+import { TasksContext } from "../context/TasksContext";
 
 export default () => {
+  const { addTask } = useContext(TasksContext);
   const [description, setDescription] = useState("");
   return (
     <View style={styles.header}>
@@ -10,6 +12,15 @@ export default () => {
         style={styles.textInput}
         onChangeText={text => setDescription(text)}
         value={description}
+        onSubmitEditing={() => {
+          if (description) {
+            setDescription("");
+            addTask(description);
+          }
+        }}
+        returnKeyType="done"
+        placeholder="Add a task..."
+        enablesReturnKeyAutomatically={true}
       />
     </View>
   );
